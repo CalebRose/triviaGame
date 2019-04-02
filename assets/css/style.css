@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h2 {
+    align-content: center;
+}
+
+.blurred-box {
+    position: relative;
+    width: 250px;
+    height: 350px;
+    top: calc(50% - 175px);
+    left: calc(50% - 125px);
+    background: inherit;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.blurred-box:after {
+    content: '';
+    width: 300px;
+    height: 300px;
+    background: inherit;
+    position: absolute;
+    left: -25px;
+    left position right: 0;
+    top: -25px;
+    top position bottom: 0;
+    box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.05);
+    filter: blur(10px);
+}
