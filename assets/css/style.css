@@ -4,7 +4,12 @@ body {
     text-align: center;
 }
 
+#main {
+    padding-top: 50px;
+}
+
 h2 {
+    padding-top: 5px;
     align-content: center;
 }
 
@@ -31,4 +36,33 @@ h2 {
     top position bottom: 0;
     box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.05);
     filter: blur(10px);
+}
+
+#time-Remaining {
+    padding-top: 10px;
+}
+
+#buttonDiv {
+    padding-top: 25px;
+}
+
+#results {
+    align-content: center;
+    clear: both;
+    margin: 0 auto;
+    position: relative;
+}
+
+.result {
+    position: block;
+    margin: 20px;
+}
+
+#resetButton {
+    position: absolute;
+    padding: 75px;
+}
+
+.question {
+    margin: 20px;
 }
