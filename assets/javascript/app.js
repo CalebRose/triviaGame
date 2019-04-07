@@ -22,7 +22,7 @@ var questionsKey = [{
         choice4: "Trevor"
     }, {
         question: "What is your quest?",
-        choice1: "To complete this stupid trivia game",
+        choice1: "To complete this trivia game",
         choice2: "To click on the Facebook tab and scroll mindlessly",
         choice3: "To pass this class",
         choice4: "To seek the holy grail"
