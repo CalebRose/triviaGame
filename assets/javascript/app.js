@@ -12,7 +12,6 @@
 // Clear Interval
 
 var intervalId; // can set Interval here
-var clockBool;
 var answerKey = ["Lewis and Clark", "At the Mississippi River", "The Desert Land Act", "Wyatt Earp", "Texas | Abilene, Kansas", "Promontory Summit, Utah",
     "1848", "President Thomas Jefferson, 1803", "Illinois", "Manifest Destiny", "Tombstone, Arizona", "John Ford", "1920"
 ];
@@ -107,7 +106,6 @@ var submittedQuestions = []; // Watch this variable.
 var questionCounter = 0;
 var totalCorrect = 0;
 var totalIncorrect = 0;
-var percentage;
 var time;
 
 
@@ -118,6 +116,7 @@ function setupGame() {
 
 }
 
+// Sets up question
 function setupQuestion() {
     $(".questionBox").html(`<h3>${questionsKey[questionCounter]["question"]}</h3>`);
     var choices = $(`<li class="list-group-item" id="${questionsKey[questionCounter]["choice1"]}" value="${questionsKey[questionCounter]["choice1"]}">${questionsKey[questionCounter]["choice1"]}</li>
@@ -134,12 +133,12 @@ function setupQuestion() {
 //  The decrement function.
 function decrement() {
 
-    //  Decrease number by one.
+    //  Decrease time by one
     time--;
-    //  Show the number in the #show-number tag.
+    //  Show updated time variable in below tag
     $("#time-Remaining").html("Time Remaining: " + time);
 
-    //  Once number hits zero...
+    //  Clear interval and go to questions screen
     if (time === 0) {
         clearInterval(intervalId);
         questionResult();
@@ -148,32 +147,38 @@ function decrement() {
 
 function questionResult() {
     if (time === 0) {
+        // If time went to zero, display ran out of time text. Increment incorrect counter
         $(".questionBox").html(`You ran out of time. The correct answer was: ${answerKey[questionCounter]}`);
         submittedQuestions[questionCounter] = "No Answer";
         totalIncorrect++;
-        console.log(submittedQuestions[questionCounter]);
     } else if (submittedQuestions[questionCounter] === answerKey[questionCounter]) {
+        // Display correct text and increment correct counter
         $(".questionBox").html(`You answered Correctly!`);
         totalCorrect++;
     } else {
+        // Display incorrect text and increment incorrect counter
         $(".questionBox").html(`Wrong! The correct answer was: ${answerKey[questionCounter]}`);
         totalIncorrect++;
     }
+    // Reset time variable to 20
     time = 20;
+    // Clear list
     $(".list-group").empty();
+    // Increment question counter
     questionCounter++;
+    // If there are no more questions to answer, go to results screen. Otherwise, setup the next question
     if (questionCounter == questionsKey.length)
         triviaResults();
     else
-        setTimeout(setupQuestion, 500);
+        setTimeout(setupQuestion, 4000);
 }
 
 function triviaResults() {
+    //  Toggle out time and choices boxes
     $(".questionBox").html(`Overall Results`);
     $("#time-Remaining").toggle();
     $("#timeBox").toggle();
     $("#choices").toggle();
-    // Div "You answered X correctly out of N Questions"
 
     // Place results in Result Div. 
     $("#results").toggle();
@@ -183,15 +188,16 @@ function triviaResults() {
     $("#resetBox").append(`<div id="reset"><button type="button" class="btn btn-primary" id="resetButton">Reset</button></div>`)
 }
 
-// triviaResults();
-setupGame();
+
 
 $(document).on("click", "#button", function () {
+    // Clicking the begin button begins the trivia quiz
     $("#buttonDiv").toggle();
     setupQuestion();
 });
 
 $(document).on("click", "#resetButton", function () {
+    // Empty results screen, reset counters, toggle off results div, and toggle ON trivia quiz divs
     $("#results").empty();
     questionCounter = 0;
     totalCorrect = 0;
@@ -207,10 +213,13 @@ $(document).on("click", "#resetButton", function () {
 });
 
 $(document).on("click", ".list-group-item", function () {
+    // Whenever user clicks on a multiple choice option
     $(".list-group").empty();
     clearInterval(intervalId);
-
     submittedQuestions[questionCounter] = $(this).attr("value");
     questionResult();
 
 });
+
+// Calls setupGame function to start the game
+setupGame();
