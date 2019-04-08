@@ -13,50 +13,94 @@
 
 var intervalId; // can set Interval here
 var clockBool;
-var answerKey = ["Trevor", "To seek the holy grail", "Blurple", "Ashur", "African or European?", "Maybe", "What kind of quiz is this?"];
+var answerKey = ["Lewis and Clark", "At the Mississippi River", "The Desert Land Act", "Wyatt Earp", "Texas | Abilene, Kansas", "Promontory Summit, Utah",
+    "1848", "President Thomas Jefferson, 1803", "Illinois", "Manifest Destiny", "Tombstone, Arizona", "John Ford", "1920"
+];
 var questionsKey = [{
-        question: "What is your name?",
-        choice1: "Wait, what?",
-        choice2: "How would you know?",
-        choice3: "What kind of trivia game is this?",
-        choice4: "Trevor"
+        question: "Who led the first expedition to explore the American West?",
+        choice1: "Tacitus Kilgore",
+        choice2: "Leviticus Cornwall",
+        choice3: "Lewis and Clark",
+        choice4: "John Cabot"
     }, {
-        question: "What is your quest?",
-        choice1: "To complete this trivia game",
-        choice2: "To click on the Facebook tab and scroll mindlessly",
-        choice3: "To pass this class",
-        choice4: "To seek the holy grail"
+        question: "Where does the West begin?",
+        choice1: "At the border of Texas",
+        choice2: "At the Mississippi River",
+        choice3: "Past New York City",
+        choice4: "Along the river Brazos"
     }, {
-        question: "What is your favorite color?",
-        choice1: "Blue",
-        choice2: "Yellow",
-        choice3: "Purple",
-        choice4: "Blurple"
+        question: "Which act did congress pass in 1877 that allowed settlers to land up to 25 cents an acre?",
+        choice1: "The Desert Land Act",
+        choice2: "The Settlers Act",
+        choice3: "The Nevada Act of 1877",
+        choice4: "The Oregon Trail Declaration"
     }, {
-        question: "What is the capital of Assyria?",
-        choice1: "How would I know?",
-        choice2: "Aleppo",
-        choice3: "Ashur",
-        choice4: "Babylon"
+        question: "Which of the following was NOT a famous outlaw from the West?",
+        choice1: "Belle Starr",
+        choice2: "The Dalton Brothers",
+        choice3: "Butch Cassidy and the Sundance Kid",
+        choice4: "Wyatt Earp"
     }, {
-        question: "What is the airspeed velocity of an unladen swallow?",
-        choice1: "I'm done with this game",
-        choice2: "African or European?",
-        choice3: "I don't know",
-        choice4: "*coconut noises*"
+        question: "In 1867, the first cattle drive went up the Chisholm Trail. Where did the drive start, and where was the destination?",
+        choice1: "Louisiana | St. Louis, Missouri",
+        choice2: "Tennessee | Oklahoma City, Oklahoma",
+        choice3: "Texas | Abilene, Kansas",
+        choice4: "Texas | St. Louis, Missouri"
     }, {
-        question: "Is this the last question?",
-        choice1: "Yes",
-        choice2: "No",
-        choice3: "Maybe",
-        choice4: "So"
+        question: "Where did the rails of the First Transcontinental Railroad join in unison?",
+        choice1: "Moab, Utah",
+        choice2: "Denver, Colorado",
+        choice3: "Vail Ski Resort",
+        choice4: "Promontory Summit, Utah"
     },
     {
-        question: "Too bad",
-        choice1: "What kind of quiz is this?",
-        choice2: "If you read this you don't need glasses",
-        choice3: "Don't click this",
-        choice4: "Click the above option"
+        question: "When did the California Gold Rush start?",
+        choice1: "1848",
+        choice2: "1849",
+        choice3: "1850",
+        choice4: "1851"
+    },
+    {
+        question: "Who bought the Louisiana Purchase, and when?",
+        choice1: "King Louis XV, 1699",
+        choice2: "President John Adams, 1802",
+        choice3: "President Thomas Jefferson, 1803",
+        choice4: "Davey Crocket, 1835"
+    },
+    {
+        question: "Which state does NOT contain territory from the Louisiana Purchase?",
+        choice1: "Illinois",
+        choice2: "Arkansas",
+        choice3: "Wyoming",
+        choice4: "New Mexico"
+    },
+    {
+        question: "What was the widely held belief that Americans were destined to expand across North America?",
+        choice1: "The Great American Journey",
+        choice2: "The 'We Just Want Cheap Rent' movement",
+        choice3: "American Progress",
+        choice4: "Manifest Destiny"
+    },
+    {
+        question: "Where did the Gunfight at the O.K. Corral occur?",
+        choice1: "Tuscon, Arizona",
+        choice2: "Tombstone, Arizona",
+        choice3: "Tulsa, Oklahoma",
+        choice4: "Santa Fe, New Mexico"
+    },
+    {
+        question: "Which director helped popularize the Western Genre?",
+        choice1: "John Ford",
+        choice2: "John Wayne",
+        choice3: "Jesse James",
+        choice4: "Leviticus Cornwall"
+    },
+    {
+        question: "When did the American West officially 'end'?",
+        choice1: "1920",
+        choice2: "When there were no cowboys left",
+        choice3: "1912",
+        choice4: "When the sunset on the horizon and the last cowboy rode off"
     }
 ];
 var submittedQuestions = []; // Watch this variable.
@@ -106,14 +150,14 @@ function questionResult() {
     if (time === 0) {
         $(".questionBox").html(`You ran out of time. The correct answer was: ${answerKey[questionCounter]}`);
         submittedQuestions[questionCounter] = "No Answer";
-        totalIncorrect--;
+        totalIncorrect++;
         console.log(submittedQuestions[questionCounter]);
     } else if (submittedQuestions[questionCounter] === answerKey[questionCounter]) {
         $(".questionBox").html(`You answered Correctly!`);
         totalCorrect++;
     } else {
         $(".questionBox").html(`Wrong! The correct answer was: ${answerKey[questionCounter]}`);
-        totalIncorrect--;
+        totalIncorrect++;
     }
     time = 20;
     $(".list-group").empty();
@@ -136,7 +180,7 @@ function triviaResults() {
     $("#results").append(`<div class="result">Total Questions: ${answerKey.length}</div>
         <div class="result">Total Correct: ${totalCorrect}</div>
         <div class="result">Total Incorrect: ${totalIncorrect}</div>`);
-    $("#results").append(`<div id="reset"><button type="button" class="btn btn-primary" id="resetButton">Reset</button></div>`)
+    $("#resetBox").append(`<div id="reset"><button type="button" class="btn btn-primary" id="resetButton">Reset</button></div>`)
 }
 
 // triviaResults();
@@ -153,14 +197,13 @@ $(document).on("click", "#resetButton", function () {
     totalCorrect = 0;
     totalIncorrect = 0;
     submittedQuestions = [];
-    setupQuestion();
-});
-
-$(document).on("click", "#reset", function () {
-    questionCounter = 0;
-    submittedQuestions = [];
-    setupQuestion();
     $("#results").toggle();
+    $("#time-Remaining").toggle();
+    $("#timeBox").toggle();
+    $("#choices").toggle();
+    $("#resetBox").empty();
+    setupQuestion();
+
 });
 
 $(document).on("click", ".list-group-item", function () {
